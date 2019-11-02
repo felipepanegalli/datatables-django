@@ -7,3 +7,5 @@ Integração do Datatables com o Django 2.x
 /faker/<int:id> [Rota para gerar quantidade x de registros]
 /v1/users [Exibe todos os registros]
 ```
+
+- A coluna de borões está na view
