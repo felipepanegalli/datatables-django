@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lista de Dados</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+</head>
+
+<body>
+<h1>Listagem de dados</h1>
+<div style="display: none">
+    <table id="myTable">
+        <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Endereço</th>
+        </tr>
+        </thead>
+    </table>
+</div>
+
+<table class="table table2">
+    <thead>
+    <tr>
+        <th scope="col">nome</th>
+        <th scope="col">endereco</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for usuario in usuarios %}
+        <tr>
+            <td>{{ usuario.nome }}</td>
+            <td>{{ usuario.endereco }}</td>
+            <td><a href="#" class="btn btn-primary">Visualizar</a>
+                <a href="#" class="btn btn-warning">Editar</a>
+                <a href="#" class="btn btn-danger">Excluir</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+
+{% include 'paginator.html' %}
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#myTable').DataTable({
+            ajax: {
+                url: '/v1/usuarios',
+                dataSrc: ''
+            },
+            columns: [{
+                'data': 'nome'
+            },
+                {
+                    'data': 'endereco'
+                },
+            ]
+        });
+        $('.table2').DataTable();
+    });
+</script>
+</body>
+
+</html>
