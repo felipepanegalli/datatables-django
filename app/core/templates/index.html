@@ -11,42 +11,17 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
 </head>
 
-<body>
+<body class="container">
 <h1>Listagem de dados</h1>
-<div style="display: none">
-    <table id="myTable">
-        <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Endereço</th>
-        </tr>
-        </thead>
-    </table>
-</div>
-
-<table class="table table2">
+<table id="myTable">
     <thead>
     <tr>
-        <th scope="col">nome</th>
-        <th scope="col">endereco</th>
+        <th>Nome</th>
+        <th>Endereço</th>
         <th>Ações</th>
     </tr>
     </thead>
-    <tbody>
-    {% for usuario in usuarios %}
-        <tr>
-            <td>{{ usuario.nome }}</td>
-            <td>{{ usuario.endereco }}</td>
-            <td><a href="#" class="btn btn-primary">Visualizar</a>
-                <a href="#" class="btn btn-warning">Editar</a>
-                <a href="#" class="btn btn-danger">Excluir</a></td>
-        </tr>
-    {% endfor %}
-    </tbody>
 </table>
-
-
-{% include 'paginator.html' %}
 
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
@@ -54,18 +29,15 @@
     $(document).ready(function () {
         $('#myTable').DataTable({
             ajax: {
-                url: '/v1/usuarios',
+                url: '/v1/users',
                 dataSrc: ''
             },
-            columns: [{
-                'data': 'nome'
-            },
-                {
-                    'data': 'endereco'
-                },
+            columns: [
+                {'data': 'nome'},
+                {'data': 'endereco'},
+                {'data': 'acoes'},
             ]
         });
-        $('.table2').DataTable();
     });
 </script>
 </body>
