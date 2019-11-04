@@ -44,6 +44,7 @@
     <script>
       $(document).ready(function() {
         $("#table").DataTable({
+          order: [[1, "asc"]],
           ajax: {
             url: "/v1/users",
             dataSrc: ""
@@ -70,17 +71,17 @@
 
       function view(val) {
         id = val.closest("tr").firstElementChild.innerText;
-        val.href = 'view/' + id;
+        val.href = "view/" + id;
       }
 
       function edit(val) {
         id = val.closest("tr").firstElementChild.innerText;
-        val.href = 'edit/' + id;
+        val.href = "edit/" + id;
       }
 
       function remove(val) {
         id = val.closest("tr").firstElementChild.innerText;
-        val.href = 'delete/' + id;
+        val.href = "delete/" + id;
       }
     </script>
   </body>
