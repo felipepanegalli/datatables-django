@@ -6,6 +6,7 @@ Integração do Datatables com o Django 2.x
 /admin/ [Rota Admin]
 /faker/<int:id> [Rota para gerar quantidade x de registros]
 /v1/users [Exibe todos os registros]
+/datatables/ [Exemplo com datatables]
 ```
 
-- A coluna de borões está na view
+- A coluna de botões está na view

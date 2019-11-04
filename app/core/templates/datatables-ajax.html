@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Datatables Ajax</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+</head>
+<body>
+<div class="container">
+    <h1>Datatables with ajax</h1>
+    <div class="py-2">
+        <label for="search">Pesquisar</label>
+        <input type="text" name="search" id="search">
+    </div>
+    <table id="table" class="table table-sm">
+        <thead>
+        <tr class="bg-info text-white">
+            <th>#</th>
+            <th>Nome</th>
+            <th>Endereço</th>
+            <th>Açoes</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario.id }}</td>
+                <td>{{ usuario.nome }}</td>
+                <td>{{ usuario.endereco }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary">View</a>
+                        <a href="#" class="btn btn-warning text-white">Edit</a>
+                        <a href="#" class="btn btn-danger">Delete</a>
+                    </div>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+    </table>
+    <br>
+    <div style="text-align: center">
+        {% include 'paginator.html' %}
+    </div>
+    <br>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+<script>
+    $('#search').keyup(function () {
+        $.ajax({
+            url: '/v1/users',
+            type: 'POST',
+            dataType: ''
+        })
+    });
+</script>
+</body>
+</html>
