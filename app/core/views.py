@@ -33,19 +33,9 @@ def faker_user(request, id):
 
 
 def user_all(request):
-    usuarios = Usuario.objects.all().values('nome', 'endereco', 'id')
+    usuarios = Usuario.objects.all().values(
+        'nome', 'endereco', 'id').order_by('nome')
 
-    for usuario in usuarios:
-        usuario['acoes'] = (
-                '<div class="btn-group" role="group">'
-                '<a href="/user/view/' + str(usuario['id']) + '" class="btn btn-primary">Visualizar</a>'
-                                                              '<a href="/user/edit/' + str(
-            usuario['id']) + '" class="btn btn-warning">Editar</a>'
-                             '<a href="/user/delete/' + str(usuario['id']) + '" class="btn btn-danger">Excluir</a>'
-                                                                             '<div>'
-        )
-
-    # Paginação
     # usuarios_paginator = Paginator(usuarios, 50)
     # usuarios_page = request.GET.get('page')
     # usuarios = usuarios_paginator.get_page(usuarios_page)
@@ -54,11 +44,4 @@ def user_all(request):
 
 
 def datatables(request):
-    search = request.GET.get('search') or ''
-    usuarios = Usuario.objects.filter(Q(nome__contains=search) | Q(endereco__icontains=search)
-                                      ).values('id','nome', 'endereco').order_by('nome')
-    # Paginação
-    usuarios_paginator = Paginator(usuarios, 50)
-    usuarios_page = request.GET.get('page')
-    usuarios = usuarios_paginator.get_page(usuarios_page)
-    return render(request, 'datatables-ajax.html', {'usuarios': usuarios})
+    return render(request, 'datatables-ajax.html')
