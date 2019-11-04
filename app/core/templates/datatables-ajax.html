@@ -26,6 +26,7 @@
       <table id="table" class="table table-sm">
         <thead>
           <tr>
+            <th>#</th>
             <th>Nome</th>
             <th>Endereço</th>
             <th>Ações</th>
@@ -48,22 +49,38 @@
             dataSrc: ""
           },
           columns: [
+            { data: "id", className: "d-none" },
             { data: "nome" },
             { data: "endereco" },
-            { data: null, className: null, defaultContent: getActions() }
+            { data: null, defaultContent: renderButtons() }
           ]
         });
       });
 
-      function getActions() {
+      function renderButtons() {
         var buttons = `<td>
             <div class="btn-group">
-                <a href="#" id="btnVisualizar" class="btn btn-primary">View</a>
-                <a href="#" id="btnEditar" class="btn btn-warning text-white">Edit</a>
-                <a href="#" id="btnExcluir" class="btn btn-danger">Delete</a>
-            </div>    
+                <a href="#" id="btnVisualizar" onclick=view(this) class="btn btn-primary">View</a>
+                <a href="#" id="btnEditar" onclick=edit(this) class="btn btn-warning text-white">Edit</a>
+                <a href="#" id="btnExcluir" onclick=remove(this) class="btn btn-danger">Delete</a>
+            </div>
         </td>`;
         return buttons;
+      }
+
+      function view(val) {
+        id = val.closest("tr").firstElementChild.innerText;
+        val.href = 'view/' + id;
+      }
+
+      function edit(val) {
+        id = val.closest("tr").firstElementChild.innerText;
+        val.href = 'edit/' + id;
+      }
+
+      function remove(val) {
+        id = val.closest("tr").firstElementChild.innerText;
+        val.href = 'delete/' + id;
       }
     </script>
   </body>
